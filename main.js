@@ -9,7 +9,7 @@ var assert = require('assert'),
     express = require('express'),
     uuid = require('node-uuid'),
     lastMile = require('connect-lastmile'),
-    json = require('body-parser').json,
+    bodyParser = require('body-parser'),
     morgan = require('morgan'),
     timeout = require('connect-timeout'),
     http = require('http'),
@@ -99,7 +99,7 @@ function initializeExpressSync() {
 
     httpServer.on('error', console.error);
 
-    var json = json({ strict: true, limit: '100kb' });
+    var json = bodyParser.json({ strict: true, limit: '100kb' });
     var router = new express.Router();
 
     // basic auth
