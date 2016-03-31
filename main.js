@@ -8,10 +8,13 @@ require('colors');
 var assert = require('assert'),
     express = require('express'),
     uuid = require('node-uuid'),
+    lastMile = require('connect-lastmile'),
+    json = require('body-parser').json,
+    morgan = require('morgan'),
+    timeout = require('connect-timeout'),
     http = require('http'),
     HttpError = require('connect-lastmile').HttpError,
-    HttpSuccess = require('connect-lastmile').HttpSuccess,
-    middleware = require('./src/middleware');
+    HttpSuccess = require('connect-lastmile').HttpSuccess;
 
 var gHttpServer = null;
 
@@ -96,7 +99,7 @@ function initializeExpressSync() {
 
     httpServer.on('error', console.error);
 
-    var json = middleware.json({ strict: true, limit: '100kb' });
+    var json = json({ strict: true, limit: '100kb' });
     var router = new express.Router();
 
     // basic auth
@@ -104,11 +107,11 @@ function initializeExpressSync() {
     router.get ('/api/v1/logout', logout);
 
     app
-        .use(middleware.morgan('SimpleAuth :method :url :status :response-time ms - :res[content-length]', { immediate: false }))
-        .use(middleware.timeout(10000))
+        .use(morgan('SimpleAuth :method :url :status :response-time ms - :res[content-length]', { immediate: false }))
+        .use(timeout(10000))
         .use(json)
         .use(router)
-        .use(middleware.lastMile());
+        .use(lastMile());
 
     return httpServer;
 }
