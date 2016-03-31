@@ -1,0 +1,24 @@
+{
+  "name": "cloudron-simpleauth-dev",
+  "version": "1.0.0",
+  "description": "SimpleAuth development server",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudron-io/simpleauth-dev.git"
+  },
+  "keywords": [
+    "cloudron",
+    "simpleauth",
+    "development"
+  ],
+  "author": "Johannes Zellner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cloudron-io/simpleauth-dev/issues"
+  },
+  "homepage": "https://github.com/cloudron-io/simpleauth-dev#readme"
+}
